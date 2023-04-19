@@ -10,7 +10,8 @@
                 {
                     "ELEMENT_TYPE":"a",
                     "ELEMENT_TAG_TYPE":"class",
-                    "ELEMENT_TAG_VALUE":"test"
+                    "ELEMENT_TAG_VALUE":"test",
+                    "ELEMENT_VALUE":"sdasdadasdqeqweqeqeqe"
 
                 }
             }
@@ -26,7 +27,8 @@
                 {
                     "ELEMENT_TYPE":"like: a or div or h1",
                     "ELEMENT_TAG_TYPE":"like: class",
-                    "ELEMENT_TAG_VALUE":"like: class value"
+                    "ELEMENT_TAG_VALUE":"like: class value",
+                    "ELEMENT_VALUE":"sdasdadasdqeqweqeqeqe"
                 }
             }
         },
@@ -42,7 +44,8 @@
                 {
                     "ELEMENT_TYPE":"like: a or div or h1",
                     "ELEMENT_TAG_TYPE":"like: class",
-                    "ELEMENT_TAG_VALUE":"like: class value"
+                    "ELEMENT_TAG_VALUE":"like: class value",
+                    "ELEMENT_VALUE":"value of element, that was receive while scraping webpage"
                 }
             }
         }

@@ -4,19 +4,17 @@ from urllib.parse import urlparse
 from .headless_drivers import HeadllessFirefoxDriver
 
 class Webpage(ABC):
-    def __init__(self, url, display_domain_name):
+    def __init__(self, url, webpage_alias):
         self.url:str = url
-        self._domain_name = display_domain_name
+        self.webpage_alias = webpage_alias
         self._webpage_content = None   
 
     def __repr__(self):
         return f'Webpage(url="{self.url}", display_domain_name="{self._domain_name}")'
 
     @classmethod
-    def initialize(cls, url):
-        domain_name = urlparse(url).netloc
-        domain_name = domain_name.split('.')[-2]
-        return cls(url, domain_name)
+    def initialize(cls, url, webpage_alias):
+        return cls(url, webpage_alias)
 
     @property
     def webpage_content(self):
@@ -44,6 +42,7 @@ class AbsSeleniumWebpage(Webpage):
 
     def change_driver(self, driver:str="firefox"):
         """Accepted drivers: firefox, chromium, safari, edge, opera"""
+        # TODO implement other drivers
         accepted_drivers = {
             "firefox":HeadllessFirefoxDriver,
             "chromium":None,

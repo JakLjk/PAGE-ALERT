@@ -1,4 +1,5 @@
 from webpage import RequestsWebpage, SeleniumWebpage
+from load_user_config import load_user_webpage_information
 
 from website_refresher import refresh_object
 
@@ -6,25 +7,27 @@ from website_refresher import refresh_object
 
 
 def main():
-    # request_test()
-    # selenium_test()
 
-    # TODO load all webpages general information 
+    # load all webpages general information 
+    webpages_to_check = load_user_webpage_information()
 
-    # for webpageinfo in list:
+    # TODO initialize refreshing function for every webpage in webpages_to_check
+    refresh_object()
 
-    refresh_object(
-        webpage_info_obj = None,
-        # url='', 
-        # compare_elems = {'t1':e1, 't2':e2}, # key is alias, value is element of webpage that was parsed 
-        web_engine_type = "requests", 
-        check_whole_site=False, 
-        use_saved_elem_data=False,)
+
+
 
 if __name__ == '__main__':
     main()
 
 
+# refresh_object(
+#     webpage_info_obj = None,
+#     # url='', 
+#     # compare_elems = {'t1':e1, 't2':e2}, # key is alias, value is element of webpage that was parsed 
+#     web_engine_type = "requests", 
+#     check_whole_site=False, 
+#     use_saved_elem_data=False,)
 
 
 # def request_test():

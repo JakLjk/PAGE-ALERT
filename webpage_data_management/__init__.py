@@ -1,1 +1,1 @@
-from .manage_domains import WebpageInfo
+from .manage_webpage_information import WebpageInfo
