@@ -1,10 +1,11 @@
 import json
+from typing import List
 
-from webpage_info import WebElementsUserConfig
+from .user_config_container import UserConfig
 
 
-def load_webpage_information(webpages_info_file = 'webpages.json') -> list:
-    webpage_template_name = "template_name"
+def load_webpage_information(webpages_info_file = 'webpages.json') -> List[UserConfig] :
+    webpage_template_name = "webpage_alias"
     user_config_data = None
     webpage_objects = []
 
@@ -19,7 +20,7 @@ def load_webpage_information(webpages_info_file = 'webpages.json') -> list:
         web_alias = webpage_alias
         web_url = webpage_information["URL"]
 
-        webpage_info_obj = WebElementsUserConfig(
+        webpage_info_obj = UserConfig(
             webpage_alias=web_alias,
             webpage_url=web_url)
         

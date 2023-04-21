@@ -1,0 +1,20 @@
+{
+    "WEBPAGES": {
+        "kopernik": {
+            "URL": "https://www.kopernikus.pl",
+            "HTML": "dasdsadsdsa"
+        },
+        "interia": {
+            "URL": "https://www.interia.pl",
+            "HTML": "dsasddsadasdsd"
+        },
+        "webpage_alias": {
+            "URL": "site_url",
+            "HTML": ""
+        },
+        "test": {
+            "URL": "ttt",
+            "HTML": "fsddgds"
+        }
+    }
+}

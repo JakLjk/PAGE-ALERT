@@ -1,8 +1,12 @@
-from .abs_web_elements_info import WebInfo
+from .abs_web_elements_info import WebInformation
 
-class WebUserConfig(WebInfo):
+
+class WebUserConfig(WebInformation):
     def __init__(self, webpage_alias, webpage_url) -> None:
         super().__init__(webpage_alias, webpage_url)
+
+    def __repr__(self) -> str:
+        return f"WebUserConfig(webpage_aliast={self.webpage_alias}, webpage_url={self.webpage_url})"
 
     def add_html_element(self, 
                          element_alias:str, 
@@ -18,9 +22,12 @@ class WebUserConfig(WebInfo):
         print(self._webpage_html_elements)
         
 
-class WebFullInfo(WebInfo):
+class WebFullInfo(WebInformation):
     def __init__(self, webpage_alias, webpage_url) -> None:
         super().__init__(webpage_alias, webpage_url)
+
+    def __repr__(self) -> str:
+        return f"WebFullInfo(webpage_aliast={self.webpage_alias}, webpage_url={self.webpage_url})"
 
     def add_html_element(self, 
                          element_alias:str, 
@@ -36,7 +43,3 @@ class WebFullInfo(WebInfo):
             "tag_value":element_tag_value,
             "element_value":element_value}
     
-
-# test = WebElementsUserConfig('x','d')
-# test.add_html_element('a','b','c','d')
-# print(test['a'])
