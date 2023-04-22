@@ -30,12 +30,26 @@ class UserConfig():
                          element_tag_type:str, 
                          element_tag_value:str):
         """adds html element with it's details to webpage's html elements list"""
+
         self._webpage_html_elements[element_alias] = {
-            "element_type":element_type,
-            "element_tag_type":element_tag_type,
-            "element_tag_value":element_tag_value
-        }
+            "element_type":element_type, 
+            "tag_info":{element_tag_type:element_tag_value}}
+        
+        # self._webpage_html_elements[element_alias] = {
+        #     "element_type":element_type,
+        #     "element_tag_type":element_tag_type,
+        #     "element_tag_value":element_tag_value,
+            # "SOUP_FORMAT":
+
 
     @property
-    def html_elements(self) -> dict:
+    def get_elements(self) -> dict:
         return self._webpage_html_elements
+    
+    # @property
+    # def get_elements_soup_format(self) -> list:
+    #     elements_formatted = {}
+    #     for element_alias, element_data in self._webpage_html_elements:
+            
+    #         elements_formatted[element_alias] = 
+    #     return 

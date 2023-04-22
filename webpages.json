@@ -22,11 +22,11 @@
             "URL":"https://www.interia.pl",
             "CHECK_ELEMENTS":
             {
-                "element_alias":
+                "x":
                 {
-                    "ELEMENT_TYPE":"like: a or div or h1",
-                    "ELEMENT_TAG_TYPE":"like: class",
-                    "ELEMENT_TAG_VALUE":"like: class value"
+                    "ELEMENT_TYPE":"d",
+                    "ELEMENT_TAG_TYPE":"as",
+                    "ELEMENT_TAG_VALUE":"lgg"
                 }
             }
         },

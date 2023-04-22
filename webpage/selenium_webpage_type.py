@@ -2,8 +2,8 @@ from .headless_selenium_drivers import HeadllessFirefoxDriver
 from .webpage import Webpage
 
 class SeleniumWebpage(Webpage):
-    def __init__(self, url, webpage_alias):
-        super().__init__(url, webpage_alias)
+    def __init__(self, webpage_url, webpage_alias):
+        super().__init__(webpage_url, webpage_alias)
 
     def refresh_webpage_content(self):
         with self._selenium_driver() as driver:

@@ -24,7 +24,10 @@ class LocalDataManagement:
             webpages_data = json.load(json_file)
 
         webpages_data = webpages_data['WEBPAGES']  
-        webpage_data = webpages_data[str(self.alias)]
+        try:
+            webpage_data = webpages_data[str(self.alias)]
+        except KeyError:
+            raise KeyError(f"There is no information stored about: {self.alias}")
 
         webpage_url = webpage_data["URL"]
         webpage_html = webpage_data['HTML']
@@ -60,4 +63,3 @@ class LocalDataManagement:
         full_data['WEBPAGES'] = webpages_data
         with open(data_file, 'w') as json_file:
             json.dump(full_data, json_file, indent=4)
-

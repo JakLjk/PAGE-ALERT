@@ -2,12 +2,12 @@ from .webpage import Webpage
 from local_web_data import LocalDataManagement
 
 class LocalWebpage(Webpage):
-    def __init__(self, url, webpage_alias): 
-        super().__init__(url, webpage_alias)
-        self.local_data = LocalDataManagement(url, webpage_alias)
+    def __init__(self, webpage_url, webpage_alias): 
+        super().__init__(webpage_url, webpage_alias)
+        self.local_data = LocalDataManagement(webpage_url, webpage_alias)
 
     def __repr__(self):
-        return f'Webpage(url="{self.url}", display_domain_name="{self._domain_name}")'
+        return f'Webpage(url="{self.url}", webpage_alias="{self.webpage_alias}")'
 
     def get_webpage_content(self):
         return self.local_data.load_data(
@@ -20,4 +20,5 @@ class LocalWebpage(Webpage):
                             web_url=self.url,
                             web_html=html,
                             replace_if_exists=replace_if_exists)
+        
     
