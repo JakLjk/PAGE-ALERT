@@ -8,16 +8,12 @@ data_file = os.path.join(here, LOCAL_FILE)
 
 
 
-# TODO Write new domain data
-
-# TODO Delete domain data
-
-# TODO Load domain data
-
 class LocalDataManagement:
     def __init__(self, webpage_alias, webpage_url) -> None:
         self.alias = webpage_alias
         self.url = webpage_url
+
+
 
     def load_data(self):
         with open(data_file) as json_file:
@@ -27,7 +23,7 @@ class LocalDataManagement:
         try:
             webpage_data = webpages_data[str(self.alias)]
         except KeyError:
-            raise KeyError(f"There is no information stored about: {self.alias}")
+            raise KeyError(f"There is no information stored about: ALIAS:{self.alias} URL:{self.url}")
 
         webpage_url = webpage_data["URL"]
         webpage_html = webpage_data['HTML']

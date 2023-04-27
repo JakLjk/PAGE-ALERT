@@ -10,7 +10,9 @@ def are_webpages_the_same(
     webpage_1_elements = read_elements(user_config, webpage_1)
     webpage_2_elements = read_elements(user_config, webpage_2)
 
+
     return webpage_1_elements == webpage_2_elements
+
 
     
 

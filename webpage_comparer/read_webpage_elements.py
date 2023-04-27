@@ -12,12 +12,11 @@ def read_elements(
     soup = BeautifulSoup(web_html, 'html.parser')
 
     found_elements = {}
-    for elem_alias, elem_data in elements_to_find:
+    for elem_alias, elem_data in elements_to_find.items():
             element_type = elem_data["element_type"]
             element_details = elem_data["tag_info"]
             found_element = soup.find(element_type, element_details)
             found_elements[elem_alias] = found_element
-
     return found_elements
 
 

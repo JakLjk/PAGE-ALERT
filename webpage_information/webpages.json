@@ -6,11 +6,11 @@
             "URL":"https://www.kopernikus.pl",
             "CHECK_ELEMENTS":
             {
-                "test":
+                "poland_emblem_test":
                 {
-                    "ELEMENT_TYPE":"a",
+                    "ELEMENT_TYPE":"div",
                     "ELEMENT_TAG_TYPE":"class",
-                    "ELEMENT_TAG_VALUE":"test"
+                    "ELEMENT_TAG_VALUE":"poland-emblem"
 
                 }
             }

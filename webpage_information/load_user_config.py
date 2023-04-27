@@ -1,15 +1,20 @@
 import json
+import os
 from typing import List
 
 from .user_config_container import UserConfig
 
+LOCAL_FILE = "webpages.json"
 
-def load_webpage_information(webpages_info_file = 'webpages.json') -> List[UserConfig] :
+here = os.path.dirname(os.path.abspath(__file__))
+file_directory = os.path.join(here, LOCAL_FILE)
+
+def load_webpage_information(webpages_info_file_dir:str = file_directory) -> List[UserConfig] :
     webpage_template_name = "webpage_alias"
     user_config_data = None
     webpage_objects = []
 
-    with open(webpages_info_file) as json_file:
+    with open(webpages_info_file_dir) as json_file:
         user_config_data = json.load(json_file)
 
     webpages_data = user_config_data['WEBPAGES']
