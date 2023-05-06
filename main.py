@@ -22,6 +22,7 @@ def main(use_gmail = True,):
         if not conf.mail_pass:
             logger.info("Password for email was not passed in config.")
             conf.mail_pass = getpass("Email Password: ")
+            assert conf.mail_pass != "", "Password cannot be empty"
         logger.info("Initializing Gmail object")
         gmail = GmailResponse(conf.mail_from, conf.mail_pass, conf.mail_to)
         response_methods.append(gmail)

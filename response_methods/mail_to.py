@@ -37,7 +37,21 @@ class GmailResponse(Responses):
 
         self.gmail.send()
 
+    def send_failure_info(self,
+                        web_alias,
+                        time_of_occurence,
+                        error_details):
 
+        self.gmail.mail_details(
+        mail_from=self._mail_from,
+        mail_to=self._mail_to,
+        subject="|Python Script| CRITICAL COMPARER FAILURE",
+        txt_message=f"""
+        Critical error has occured during website comparer process
+        Error detected on webpage: {web_alias}
+        Hour of detection: {time_of_occurence}
+        ERROR MESSAGE:
+        {error_details}""")
 
 
 

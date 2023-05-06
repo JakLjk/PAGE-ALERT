@@ -59,32 +59,40 @@ def refresh_object(
                     replace_if_exists=True)
 
     while True:
-        logger.info(f"{webpage_alias}| Checking...")
-        are_webs_the_same = are_webpages_the_same(
-                    user_config=user_webpage_information,
-                    webpage_1=webpage_obj,
-                    webpage_2=local_webpage_obj)
-        
-        if are_webs_the_same[0]:
-            logger.info(f"{webpage_alias}| Did not find any differences between reference and current webpage")
-        else: 
-            logger.info(f"{webpage_alias}| Found differences between reference and current webpage")
-            logger.info(f"Sending notifiation via {len(response_elements)} methods")
-            different_aliases = ", ".join(are_webs_the_same[1])
-            current_time = strftime("%Y-%m-%d %H:%M:%S", localtime())
+        try: 
+            logger.info(f"{webpage_alias}| Checking...")
+            are_webs_the_same = are_webpages_the_same(
+                        user_config=user_webpage_information,
+                        webpage_1=webpage_obj,
+                        webpage_2=local_webpage_obj)
+            
+            if are_webs_the_same[0]:
+                logger.info(f"{webpage_alias}| Did not find any differences between reference and current webpage")
+            else: 
+                logger.info(f"{webpage_alias}| Found differences between reference and current webpage")
+                logger.info(f"Sending notifiation via {len(response_elements)} methods")
+                different_aliases = ", ".join(are_webs_the_same[1])
+                current_time = strftime("%Y-%m-%d %H:%M:%S", localtime())
+                for response in response_elements:
+                    response.send_response(
+                        web_alias = webpage_alias,
+                        element_details = different_aliases,
+                        time_of_occurence = current_time)
+                num_of_retries = 0
+            
+            logger.info("===============================================")
+            if num_of_retries is not None and num_of_retries <=0:
+                break
+            if num_of_retries is not None:
+                num_of_retries -= 1
+            sleep(refresh_time_seconds)
+            
+        except Exception as expt:
             for response in response_elements:
-                response.send_response(
+                response.send_failure_info(
                     web_alias = webpage_alias,
-                    element_details = different_aliases,
-                    time_of_occurence = current_time)
-            num_of_retries = 0
-        
-        logger.info("===============================================")
-        if num_of_retries is not None and num_of_retries <=0:
-            break
-        if num_of_retries is not None:
-            num_of_retries -= 1
-
-        sleep(refresh_time_seconds)
+                    time_of_occurence = current_time,
+                    error_details = expt)
+            raise expt
 
     
