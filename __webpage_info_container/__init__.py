@@ -1,1 +1,0 @@
-from .web_elements_info import WebUserConfig, WebFullInfo

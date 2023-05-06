@@ -1,6 +1,6 @@
 import logging 
 
-# Variable can be implemented into proper config file, and imported
+# Path to optional log file
 LOG_PATH = ""
 
 # If path for logging file was defined:

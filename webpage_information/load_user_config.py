@@ -1,15 +1,15 @@
-import json
-import os
-from typing import List
-
 from .user_config_container import UserConfig
 
-LOCAL_FILE = "webpages.json"
+import json
+from typing import List
+from pathlib import Path
 
-here = os.path.dirname(os.path.abspath(__file__))
-file_directory = os.path.join(here, LOCAL_FILE)
 
-def load_webpage_information(webpages_info_file_dir:str = file_directory) -> List[UserConfig] :
+base_path = Path(__file__).parent
+file_path = (base_path / "../configs/webpages.json").resolve()
+
+
+def load_webpage_information(webpages_info_file_dir:str = file_path) -> List[UserConfig]:
     webpage_template_name = "webpage_alias"
     user_config_data = None
     webpage_objects = []
@@ -24,10 +24,14 @@ def load_webpage_information(webpages_info_file_dir:str = file_directory) -> Lis
 
         web_alias = webpage_alias
         web_url = webpage_information["URL"]
+        web_refresh_interval = webpage_information["CHECK_INTERVAL_MIN"]
+        web_num_of_refresh = webpage_information["NUM_OF_RETRIES"]
 
         webpage_info_obj = UserConfig(
             webpage_alias=web_alias,
-            webpage_url=web_url)
+            webpage_url=web_url,
+            retry_interval=web_refresh_interval,
+            num_of_retries=web_num_of_refresh)
         
         elements = webpage_information["CHECK_ELEMENTS"]
         for element_alias, element_details in elements.items():

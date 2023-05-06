@@ -1,8 +1,4 @@
 from abc import ABC, abstractmethod
-from urllib.parse import urlparse
-
-from .headless_selenium_drivers import HeadllessFirefoxDriver
-
 class Webpage(ABC):
     def __init__(self, webpage_url, webpage_alias):
         self.url:str = webpage_url

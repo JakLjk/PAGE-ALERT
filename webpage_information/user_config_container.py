@@ -3,9 +3,14 @@ from abc import ABC, abstractmethod
 
 
 class UserConfig():
-    def __init__(self, webpage_alias, webpage_url) -> None:
+    def __init__(self, webpage_alias,
+                webpage_url, 
+                num_of_retries, 
+                retry_interval = None) -> None:
         self.webpage_alias = webpage_alias
         self.webpage_url = webpage_url
+        self.num_of_retries = num_of_retries
+        self.retry_interval_min = retry_interval
         self._webpage_html_elements = {}        
 
     def __repr__(self) -> str:
@@ -35,21 +40,7 @@ class UserConfig():
             "element_type":element_type, 
             "tag_info":{element_tag_type:element_tag_value}}
         
-        # self._webpage_html_elements[element_alias] = {
-        #     "element_type":element_type,
-        #     "element_tag_type":element_tag_type,
-        #     "element_tag_value":element_tag_value,
-            # "SOUP_FORMAT":
-
-
     @property
     def get_elements(self) -> dict:
         return self._webpage_html_elements
     
-    # @property
-    # def get_elements_soup_format(self) -> list:
-    #     elements_formatted = {}
-    #     for element_alias, element_data in self._webpage_html_elements:
-            
-    #         elements_formatted[element_alias] = 
-    #     return 

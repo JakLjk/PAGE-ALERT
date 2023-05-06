@@ -2,18 +2,14 @@ import json
 import os
 
 LOCAL_FILE = "webpage_elements_data.json"
-
 here = os.path.dirname(os.path.abspath(__file__))
 data_file = os.path.join(here, LOCAL_FILE)
-
 
 
 class LocalDataManagement:
     def __init__(self, webpage_alias, webpage_url) -> None:
         self.alias = webpage_alias
         self.url = webpage_url
-
-
 
     def load_data(self):
         with open(data_file) as json_file:
@@ -48,6 +44,7 @@ class LocalDataManagement:
             webpages_data[self.alias]
             data_exists = True
         except KeyError:
+            webpages_data[self.alias] = {}
             data_exists = False
 
         if not replace_if_exists and data_exists:

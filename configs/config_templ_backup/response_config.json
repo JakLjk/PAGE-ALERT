@@ -1,0 +1,13 @@
+{
+    "LOGINS":
+        {
+            "GMAIL":
+            {
+                "MAIL_FROM":"",
+                "MAIL_FROM_OPTIONAL_PASSWD":"",
+                "MAIL_TO":""
+
+            }
+        }
+
+}

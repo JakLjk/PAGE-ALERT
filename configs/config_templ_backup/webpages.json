@@ -1,0 +1,25 @@
+{
+    "WEBPAGES":
+    {
+
+        "webpage_alias":
+        {
+            "URL":"site_url",
+            "CHECK_INTERVAL_MIN":5,
+            "NUM_OF_RETRIES":null,
+            "CHECK_ELEMENTS":
+            {
+                "element_alias_to_change":
+                {
+                    "ELEMENT_TYPE":"like: a or div or h1",
+                    "ELEMENT_TAG_TYPE":"like: class",
+                    "ELEMENT_TAG_VALUE":"like: class value"
+                }
+            }
+        }
+
+
+    }
+
+}
+

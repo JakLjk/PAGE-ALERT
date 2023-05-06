@@ -1,13 +1,17 @@
-from time import sleep
-
 from logger import logger
+from response_methods import Responses
 
 from webpage import SeleniumWebpage, RequestsWebpage
 from webpage import LocalWebpage, Webpage
 from webpage_information import UserConfig
 from webpage_comparer import are_webpages_the_same
 
+from threading import Lock
+from time import sleep, strftime, localtime
+
 def get_webpage_obj(engine_name='') -> Webpage:
+    """Allows for selecting most suitable webpage element,
+    If webpage has a lot of javascriptm Selenium might be better choice"""
     web_engines = {
         "requests":RequestsWebpage,
         "selenium":SeleniumWebpage}
@@ -17,21 +21,22 @@ def get_webpage_obj(engine_name='') -> Webpage:
         web_engines_names = ' or '.join(str(web_engines.keys()))
         raise KeyError(f"Passed wrong argument for web_engine_type, try:  {web_engines_names}")
 
-# Change fucntion into class with accessible condition for while loop?  
 def refresh_object(
         user_webpage_information:UserConfig,
-        web_engine_type = "requests", 
+        thread_lock:Lock,
+        web_engine_type="requests", 
+        response_elements:Responses=None,
         check_whole_site=False,  # TODO
-        use_saved_elem_data=False, # TODO
-        refresh_time_min = 1 
+        use_saved_elem_data=False,
         ):
+    """Main function for fetching and comparing webpage data"""
     
-    
-    webpage_url = user_webpage_information.webpage_url
+    # Loading configs with webpage details
     webpage_alias = user_webpage_information.webpage_alias
-    logger.info(f"Initializing refresh function for webpage: {webpage_alias}")
-
-    refresh_time_seconds = refresh_time_min * 60
+    logger.info(f"{webpage_alias}| Unpacking user config")
+    webpage_url = user_webpage_information.webpage_url
+    refresh_time_seconds = user_webpage_information.retry_interval_min * 60
+    num_of_retries = user_webpage_information.num_of_retries
 
     logger.info(f"{webpage_alias}| webdriver type: {web_engine_type}")
     web_engine_type = get_webpage_obj(web_engine_type)
@@ -48,10 +53,10 @@ def refresh_object(
     
     logger.info(f"{webpage_alias}| Using previously saved webpage structure = {use_saved_elem_data}")
     if not use_saved_elem_data:
-        local_webpage_obj.set_webpage_content(
-                html=webpage_obj.get_webpage_content(),
-                replace_if_exists=True)
-
+        with thread_lock:
+            local_webpage_obj.set_webpage_content(
+                    html=webpage_obj.get_webpage_content(),
+                    replace_if_exists=True)
 
     while True:
         logger.info(f"{webpage_alias}| Checking...")
@@ -59,18 +64,27 @@ def refresh_object(
                     user_config=user_webpage_information,
                     webpage_1=webpage_obj,
                     webpage_2=local_webpage_obj)
-        if are_webs_the_same:
+        
+        if are_webs_the_same[0]:
             logger.info(f"{webpage_alias}| Did not find any differences between reference and current webpage")
         else: 
             logger.info(f"{webpage_alias}| Found differences between reference and current webpage")
-
+            logger.info(f"Sending notifiation via {len(response_elements)} methods")
+            different_aliases = ", ".join(are_webs_the_same[1])
+            current_time = strftime("%Y-%m-%d %H:%M:%S", localtime())
+            for response in response_elements:
+                response.send_response(
+                    web_alias = webpage_alias,
+                    element_details = different_aliases,
+                    time_of_occurence = current_time)
+            num_of_retries = 0
+        
+        logger.info("===============================================")
+        if num_of_retries is not None and num_of_retries <=0:
+            break
+        if num_of_retries is not None:
+            num_of_retries -= 1
 
         sleep(refresh_time_seconds)
-
-    
-
-
-
-
 
     
