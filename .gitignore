@@ -3,6 +3,16 @@ geckodriver.log
 test.*
 .DS_Store
 
+# Credentials file:
+response_config.json
+webpages_local_test.json
+response_config_local_test.json
+
+# Log file
+main_log
+
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

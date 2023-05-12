@@ -19,6 +19,8 @@ def main(use_gmail = True,):
     if use_gmail:
         logger.info("Loading Gmail Config")
         conf = GmailConfig()
+        assert conf.mail_from != "", "Gmail: mail_from argument not passed in config"
+        assert conf.mail_to != "", "Gmail: mail_to argument not passed in config"
         if not conf.mail_pass:
             logger.info("Password for email was not passed in config.")
             conf.mail_pass = getpass("Email Password: ")

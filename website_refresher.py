@@ -59,6 +59,7 @@ def refresh_object(
                     replace_if_exists=True)
 
     while True:
+        current_time = strftime("%Y-%m-%d %H:%M:%S", localtime())
         try: 
             logger.info(f"{webpage_alias}| Checking...")
             are_webs_the_same = are_webpages_the_same(
@@ -72,7 +73,6 @@ def refresh_object(
                 logger.info(f"{webpage_alias}| Found differences between reference and current webpage")
                 logger.info(f"Sending notifiation via {len(response_elements)} methods")
                 different_aliases = ", ".join(are_webs_the_same[1])
-                current_time = strftime("%Y-%m-%d %H:%M:%S", localtime())
                 for response in response_elements:
                     response.send_response(
                         web_alias = webpage_alias,
@@ -89,6 +89,7 @@ def refresh_object(
             
         except Exception as expt:
             for response in response_elements:
+                print(response)
                 response.send_failure_info(
                     web_alias = webpage_alias,
                     time_of_occurence = current_time,

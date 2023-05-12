@@ -21,6 +21,9 @@ class GmailResponse(Responses):
             self._mail_from = mail_from
         self._mail_to = mail_to
 
+    def __repr__(self):
+        return "GmailResponse()"
+
     def send_response(self, 
                       web_alias, 
                       element_details, 
@@ -34,7 +37,6 @@ class GmailResponse(Responses):
         Change detected on webpage: {web_alias}
         Changed webpage element: {element_details}.
         Hour of detection: {time_of_occurence}.""")
-
         self.gmail.send()
 
     def send_failure_info(self,
@@ -51,8 +53,12 @@ class GmailResponse(Responses):
         Error detected on webpage: {web_alias}
         Hour of detection: {time_of_occurence}
         ERROR MESSAGE:
-        {error_details}""")
+        ------------------------------------------------------------
 
+        {error_details}
+
+        ------------------------------------------------------------""")
+        self.gmail.send()
 
 
 

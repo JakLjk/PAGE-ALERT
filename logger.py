@@ -1,21 +1,34 @@
 import logging 
+from logging.handlers import RotatingFileHandler
 
-# Path to optional log file
-LOG_PATH = ""
 
-# If path for logging file was defined:
-if LOG_PATH:
-        handlers = [logging.FileHandler(LOG_PATH),
-                    logging.StreamHandler()]
-# If path for logging file was not defined, don't save logs, just display them:        
-else: 
-    handlers = [logging.StreamHandler()]
+from pathlib import Path
 
-# using implementation from logging module
-logger = logging
 
-logger.basicConfig(
-    level=logging.INFO,
-    # Formatting of logging information, that will be displayed.
-    format="%(asctime)s [%(levelname)s] %(message)s ||| [%(threadName)s] ",
-    handlers=handlers)
+base_path = str(Path(__file__).parent)
+file_name = '/Logs/main_log'
+
+full_path = base_path + file_name
+
+# New Logging Script
+
+log_format = logging.Formatter("%(asctime)s [%(levelname)s] %(message)s ||| [%(threadName)s] ")
+
+logger = logging.getLogger('root')
+logger.setLevel(logging.INFO)
+
+stream_handler = logging.StreamHandler()
+stream_handler.setFormatter(log_format)
+stream_handler.setLevel(logging.INFO)
+logger.addHandler(stream_handler)
+
+if full_path != '':
+    file_handler = RotatingFileHandler(full_path, mode='a', maxBytes=5*1024*1024,
+                                    backupCount=2, encoding=None, delay=False)
+    file_handler.setFormatter(log_format)
+    file_handler.setLevel(logging.INFO)
+    logger.addHandler(file_handler)
+
+
+
+
