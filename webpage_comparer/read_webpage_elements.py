@@ -15,8 +15,18 @@ def read_elements(
         for elem_alias, elem_data in elements_to_find.items():
                 element_type = elem_data["element_type"]
                 element_details = elem_data["tag_info"]
-                found_element = soup.find(element_type, element_details)
-                found_elements[elem_alias] = found_element
+
+                # Alternative implementation searching for many div with the same specifics 
+                found_element = soup.find_all(element_type, element_details)
+                for i, elem in enumerate(found_element):
+                        use_alias = elem_alias
+                        if i != 0:
+                                use_alias = f"{elem_alias}_{i}"
+                        found_elements[use_alias] = elem
+
+                # found_element = soup.find(element_type, element_details)
+                # found_elements[elem_alias] = found_element
+
         return found_elements
 
 
