@@ -1,6 +1,6 @@
-from .respond_to_user import Responses
-from .gmail_emailer import GmailMailer
-
+# from ..abs_response.respond_to_user import Responses
+from .gmail_mail_object import GmailMailer
+from ..abs_response import Responses
 
 class GmailResponse(Responses):
     def __init__(self,

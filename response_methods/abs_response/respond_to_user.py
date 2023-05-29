@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class Responses(ABC):
     def __init__(self) -> None:
         pass

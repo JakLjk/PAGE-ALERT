@@ -3,14 +3,16 @@ from logging.handlers import RotatingFileHandler
 
 
 from pathlib import Path
-
+import os
 
 base_path = str(Path(__file__).parent)
-file_name = '/Logs/main_log'
-
+file_name = '/Saved_Logs/main_log'
 full_path = base_path + file_name
 
-# New Logging Script
+#Create log file if it does not yet exist
+if not os.path.isfile(full_path):
+    with open(full_path, 'w') as f:
+        pass
 
 log_format = logging.Formatter("%(asctime)s [%(levelname)s] %(message)s ||| [%(threadName)s] ")
 
